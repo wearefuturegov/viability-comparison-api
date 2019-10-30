@@ -1,0 +1,8 @@
+Local Authority,LA ID,Site (application),Name,Location,GeoJSON,Date,Gross Development Value,Construction Costs,Professional Fees,Marketing and Letting,Finance,"Financial planning obligations, Inc AH",Developer Profit,Residual Land Value,Benchmark Land Value,Residential Units,Habitable Rooms,Commercial Area
+Southwark,SWK,VA 18/AP/1603 - 2018-06-22,"Sampson House, Hopton Street, SE1","51.506510, -0.102420",Link,18-May,"£750,909,303","£347,792,490","£41,321,880","£10,111,246",,,,"£63,940,469","£100,917,918",,,
+Southwark,SWK,VA 18/AP/2295 - 2018-07-30,"Alscot Road, London SE1 3AG","51.49544, -0.073560",Link,18-Jul,"£23,546,081","£11,760,002","£1,176,000","£470,922","£1,461,058","£1,160,465","£3,531,912","£3,985,722","£3,985,722",,,
+Southwark,SWK,VA 18/AP/2497 - 2018-07-30,"79-161 Ilderton Road, London, SE16","51.481740, -0.053830",Link,,"£140,000,241",,,"£1,765,573","£9,086,508",,"£16,172,461",,"£5,382,000",,,
+Tower Hamlets,TWH,PA/17/03015,Jolles House,"51.528289, -0.015796",,01/12/2017,"£21,722,012","£16,534,811","£198,418","£563,594","£1,061,471","£29,511","£1,569,466","-£555,258","£2,240,000",70,209,-
+Tower Hamlets,TWH,PA/18/00528,Gillender Street,"51.521457, -0.010233",,16/03/2018,"£114,658,450","£54,011,711","£7,480,619","£906,882","£5,102,745","£1,654,443","£19,732,719","-£846,152","£7,170,000",307,839,"1,613"
+Tower Hamlets,TWH,PA/18/00065,Regency Court,"51.530986, -0.033363",,12/01/2018,"£27,195,577","£22,435,542","£2,692,265","£365,800","£474,709","£107,299","£543,912","-£4,751,358","£4,900,000",92,,
+Tower Hamlets,TWH,PA/19/00078,519-523 Cambridge Heath Road,"51.533389, -0.057512",,08/01/2019,"£5,380,821","£2,408,482","240,848","£73,957","£211,096","£39,466","£780,683","£2,061,818","£1,271,784",13,22,£150

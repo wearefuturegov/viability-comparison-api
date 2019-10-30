@@ -1,0 +1,2 @@
+class ViabilityAppraisal < ApplicationRecord
+end

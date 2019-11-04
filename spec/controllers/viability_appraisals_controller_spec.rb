@@ -24,6 +24,12 @@ RSpec.describe ViabilityAppraisalsController do
       expect(json_response["data"].first["attributes"].keys).to eq(viability_appraisal_serializer.serializable_hash[:data][:attributes].keys.map(&:to_s))
     end
 
+    it "JSON body response contains expected values for viability appraisals" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_serializer = ViabilityAppraisalSerializer.new(viability_appraisals.first)
+      expect(json_response["data"].first["attributes"].values).to eq(JSON.parse(viability_appraisal_serializer.serialized_json)["data"]["attributes"].values)
+    end
+
   end
 
   describe "GET #show" do
@@ -41,6 +47,12 @@ RSpec.describe ViabilityAppraisalsController do
       json_response = JSON.parse(response.body)
       viability_appraisal_attributes = ViabilityAppraisalSerializer.new(viability_appraisal).serializable_hash[:data][:attributes]
       expect(json_response["data"]["attributes"].keys).to eq(viability_appraisal_attributes.keys.map(&:to_s))
+    end
+
+    it "JSON body response contains expected values for a viability appraisal" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_serializer = ViabilityAppraisalSerializer.new(viability_appraisal)
+      expect(json_response["data"]["attributes"].values).to eq(JSON.parse(viability_appraisal_serializer.serialized_json)["data"]["attributes"].values)
     end
 
   end

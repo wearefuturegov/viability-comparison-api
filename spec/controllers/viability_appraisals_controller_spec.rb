@@ -15,13 +15,13 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response contains expected number of viability appraisals" do
       json_response = JSON.parse(response.body)
-      expect(json_response.count).to equal(20)
+      expect(json_response["data"].count).to equal(20)
     end
 
     it "JSON body response contains expected attributes for viability appraisals" do
       json_response = JSON.parse(response.body)
       viability_appraisal_serializer = ViabilityAppraisalSerializer.new(viability_appraisals.first)
-      expect(json_response.first.keys).to eq(viability_appraisal_serializer.serializable_hash[:data][:attributes].keys.map(&:to_s))
+      expect(json_response["data"].first["attributes"].keys).to eq(viability_appraisal_serializer.serializable_hash[:data][:attributes].keys.map(&:to_s))
     end
 
   end
@@ -40,8 +40,7 @@ RSpec.describe ViabilityAppraisalsController do
     it "JSON body response contains expected viability appraisal attributes" do
       json_response = JSON.parse(response.body)
       viability_appraisal_attributes = ViabilityAppraisalSerializer.new(viability_appraisal).serializable_hash[:data][:attributes]
-      byebug
-      expect(json_response.keys).to eq(viability_appraisal_attributes.keys.map(&:to_s))
+      expect(json_response["data"]["attributes"].keys).to eq(viability_appraisal_attributes.keys.map(&:to_s))
     end
 
   end

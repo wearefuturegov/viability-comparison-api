@@ -5,12 +5,13 @@ class ViabilityAppraisalsController < ApplicationController
   def index
     @viability_appraisals = ViabilityAppraisal.all
 
-    render json: @viability_appraisals
+    render json: ViabilityAppraisalSerializer.new(@viability_appraisals).serializable_hash
+    #render json: @viability_appraisals, exclude: [:created_at, :updated_at]
   end
 
   # GET /viability_appraisals/1
   def show
-    render json: @viability_appraisal
+    render json: ViabilityAppraisalSerializer.new(@viability_appraisal).serializable_hash
   end
 
   # POST /viability_appraisals

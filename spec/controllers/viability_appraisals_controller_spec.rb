@@ -13,10 +13,35 @@ RSpec.describe ViabilityAppraisalsController do
       expect(response).to have_http_status(:success)
     end
 
-    it "JSON body response contains expected viability appraisals" do
+    it "JSON body response contains expected number of viability appraisals" do
       json_response = JSON.parse(response.body)
       expect(json_response.count).to equal(20)
-      expect(json_response.first.keys).to match_array(ViabilityAppraisal.first.attributes.keys)
+    end
+
+    it "JSON body response contains expected attributes for viability appraisals" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_serializer = ViabilityAppraisalSerializer.new(viability_appraisals.first)
+      expect(json_response.first.keys).to eq(viability_appraisal_serializer.serializable_hash[:data][:attributes].keys.map(&:to_s))
+    end
+
+  end
+
+  describe "GET #show" do
+    let!(:viability_appraisal) { FactoryBot.create(:viability_appraisal) }
+
+    before do
+      get :show, params: { id: viability_appraisal.id }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "JSON body response contains expected viability appraisal attributes" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_attributes = ViabilityAppraisalSerializer.new(viability_appraisal).serializable_hash[:data][:attributes]
+      byebug
+      expect(json_response.keys).to eq(viability_appraisal_attributes.keys.map(&:to_s))
     end
 
   end

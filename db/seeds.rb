@@ -8,10 +8,19 @@
 
 require 'csv'
 
-def to_decimal money_string
+def to_pence money_string
   if money_string
-    money_string.remove!(",", "£")
-    money_string.to_i
+    money_string.tr!('^0-9', '')
+    money_string.to_i * 100
+  else
+    nil
+  end
+end
+
+def to_centimetres measurement_string
+  if measurement_string
+    measurement_string.tr!('^0-9', '')
+    measurement_string.to_i * 100
   else
     nil
   end
@@ -24,18 +33,18 @@ CSV.foreach(Rails.root.join('lib/viability_appraisals.csv'), headers: true) do |
     application: row["Site (application)"],
     name: row["Name"],
     date_submitted: row["Date"],
-    gross_development_value: to_decimal(row["Gross Development Value"]),
-    construction_costs: to_decimal(row["Construction Costs"]),
-    professional_fees: to_decimal(row["Professional Fees"]),
-    marketing_and_letting: to_decimal(row["Marketing and Letting"]),
-    finance: to_decimal(row["Finance"]),
-    financial_planning_obligations: to_decimal(row["Financial planning obligations, Inc AH"]),
-    developer_profit: to_decimal(row["Developer Profit"]),
-    residual_land_value: to_decimal(row["Residual Land Value"]),
-    benchmark_land_value: to_decimal(row["Benchmark Land Value"]),
+    gross_development_value_pence: to_pence(row["Gross Development Value"]),
+    construction_costs_pence: to_pence(row["Construction Costs"]),
+    professional_fees_pence: to_pence(row["Professional Fees"]),
+    marketing_and_letting_pence: to_pence(row["Marketing and Letting"]),
+    finance_pence: to_pence(row["Finance"]),
+    financial_planning_obligations_pence: to_pence(row["Financial planning obligations, Inc AH"]),
+    developer_profit_pence: to_pence(row["Developer Profit"]),
+    residual_land_value_pence: to_pence(row["Residual Land Value"]),
+    benchmark_land_value_pence: to_pence(row["Benchmark Land Value"]),
     residential_units: row["Residential Units"],
     habitable_rooms: row["Habitable Rooms"],
-    commercial_area_square_meters: to_decimal(row["Commercial Area"])
+    commercial_area_square_centimetres: to_centimetres(row["Commercial Area"])
   )
   if location = row["Location"]
     va.latitude = location.split(", ")[0]

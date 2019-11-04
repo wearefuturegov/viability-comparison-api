@@ -23,18 +23,18 @@ ActiveRecord::Schema.define(version: 2019_10_28_154338) do
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
     t.date "date_submitted"
-    t.decimal "gross_development_value", precision: 15, scale: 2
-    t.decimal "construction_costs", precision: 15, scale: 2
-    t.decimal "professional_fees", precision: 15, scale: 2
-    t.decimal "marketing_and_letting", precision: 15, scale: 2
-    t.decimal "finance", precision: 15, scale: 2
-    t.decimal "financial_planning_obligations", precision: 15, scale: 2
-    t.decimal "developer_profit", precision: 15, scale: 2
-    t.decimal "residual_land_value", precision: 15, scale: 2
-    t.decimal "benchmark_land_value", precision: 15, scale: 2
+    t.bigint "gross_development_value_pence"
+    t.bigint "construction_costs_pence"
+    t.bigint "professional_fees_pence"
+    t.bigint "marketing_and_letting_pence"
+    t.bigint "finance_pence"
+    t.bigint "financial_planning_obligations_pence"
+    t.bigint "developer_profit_pence"
+    t.bigint "residual_land_value_pence"
+    t.bigint "benchmark_land_value_pence"
     t.integer "residential_units"
     t.integer "habitable_rooms"
-    t.decimal "commercial_area_square_meters", precision: 15, scale: 2
+    t.bigint "commercial_area_square_centimetres"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

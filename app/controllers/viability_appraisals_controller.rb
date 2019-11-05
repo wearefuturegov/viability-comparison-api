@@ -4,9 +4,9 @@ class ViabilityAppraisalsController < ApplicationController
   # GET /viability_appraisals
   def index
     @viability_appraisals = ViabilityAppraisal.all
-
+    @viability_appraisals = @viability_appraisals.min_habitable_rooms(params[:min_habitable_rooms]) if params[:min_habitable_rooms].present?
+    @viability_appraisals = @viability_appraisals.max_habitable_rooms(params[:max_habitable_rooms]) if params[:max_habitable_rooms].present?
     render json: ViabilityAppraisalSerializer.new(@viability_appraisals)
-    #render json: @viability_appraisals, exclude: [:created_at, :updated_at]
   end
 
   # GET /viability_appraisals/1

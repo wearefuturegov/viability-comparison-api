@@ -17,7 +17,7 @@ FactoryBot.define do
     residual_land_value_pence { 999 }
     benchmark_land_value_pence { 999 }
     residential_units { 1 }
-    habitable_rooms { 2 }
+    habitable_rooms { rand(1000) }
     commercial_area_square_centimetres{ 999 }
   end
 end

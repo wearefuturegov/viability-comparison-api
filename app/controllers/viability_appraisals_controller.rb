@@ -4,8 +4,11 @@ class ViabilityAppraisalsController < ApplicationController
   # GET /viability_appraisals
   def index
     @viability_appraisals = ViabilityAppraisal.all
-    @viability_appraisals = @viability_appraisals.min_habitable_rooms(params[:min_habitable_rooms]) if params[:min_habitable_rooms].present?
-    @viability_appraisals = @viability_appraisals.max_habitable_rooms(params[:max_habitable_rooms]) if params[:max_habitable_rooms].present?
+
+    filtering_params(params).each do |key, value|
+      @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?
+    end
+
     render json: ViabilityAppraisalSerializer.new(@viability_appraisals)
   end
 
@@ -48,5 +51,9 @@ class ViabilityAppraisalsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def viability_appraisal_params
       params.require(:viability_appraisal).permit(:local_authority, :local_authority_id, :application, :name, :latitude, :longitude, :date_submitted, :gross_development_value, :construction_costs, :professional_fees, :marketing_and_letting, :finance, :financial_planning_obligations, :developer_profit, :residual_land_value, :benchmark_land_value, :residential_units, :habitable_rooms, :commercial_area_square_meters)
+    end
+
+    def filtering_params(params)
+      params.slice(:min_habitable_rooms, :max_habitable_rooms)
     end
 end

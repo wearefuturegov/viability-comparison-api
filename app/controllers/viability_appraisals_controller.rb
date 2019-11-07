@@ -6,7 +6,17 @@ class ViabilityAppraisalsController < ApplicationController
     @viability_appraisals = ViabilityAppraisal.all
 
     filtering_params(params).each do |key, value|
-      @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?
+      if key == 'sort'
+        if value.start_with?('-')
+          direction = 'desc'
+          value = value[1..-1]
+        else
+          direction = 'asc'
+        end
+        @viability_appraisals = @viability_appraisals.order_by(value, direction)
+      else
+        @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?
+      end
     end
 
     render json: ViabilityAppraisalSerializer.new(@viability_appraisals)
@@ -54,6 +64,6 @@ class ViabilityAppraisalsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:min_habitable_rooms, :max_habitable_rooms)
+      params.slice(:min_habitable_rooms, :max_habitable_rooms, :sort)
     end
 end

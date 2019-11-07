@@ -1,9 +1,11 @@
+require 'faker'
+
 FactoryBot.define do
   factory :viability_appraisal, class: ViabilityAppraisal do
     local_authority { "Southwark" }
     local_authority_id { "SWK" }
     application { "ASZDGFH" }
-    name { "APP 1" }
+    name { Faker::Name.name }
     latitude { 999 }
     longitude { 999 }
     date_submitted { "2019-10-28" }

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ViabilityAppraisalsController do
 
   describe "GET #index" do
+
     let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
 
     before do
@@ -72,6 +73,33 @@ RSpec.describe ViabilityAppraisalsController do
       json_response = JSON.parse(response.body)
       viability_appraisal_count = ViabilityAppraisal.where("habitable_rooms > ?", 300).where("habitable_rooms < ?", 700).count
       expect(json_response["data"].count).to eq(viability_appraisal_count)
+    end
+
+  end
+
+  describe "GET #index sort by habitable rooms" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+
+    it "sorts descending" do
+      most_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first
+      least_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).last
+
+      get :index, params: { sort: '-habitable_rooms' }
+      json_response = JSON.parse(response.body)
+
+      expect(json_response["data"].first["attributes"]["name"]).to eq(most_habitable_rooms.name)
+      expect(json_response["data"].last["attributes"]["name"]).to eq(least_habitable_rooms.name)
+    end
+
+    it "sorts ascending" do
+      most_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first
+      least_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).last
+
+      get :index, params: { sort: 'habitable_rooms' }
+      json_response = JSON.parse(response.body)
+
+      expect(json_response["data"].first["attributes"]["name"]).to eq(least_habitable_rooms.name)
+      expect(json_response["data"].last["attributes"]["name"]).to eq(most_habitable_rooms.name)
     end
 
   end

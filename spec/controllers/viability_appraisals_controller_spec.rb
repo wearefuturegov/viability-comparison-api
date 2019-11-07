@@ -84,7 +84,7 @@ RSpec.describe ViabilityAppraisalsController do
       most_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first
       least_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).last
 
-      get :index, params: { sort: '-habitable_rooms' }
+      get :index, params: { directional_sort: '-habitable_rooms' }
       json_response = JSON.parse(response.body)
 
       expect(json_response["data"].first["attributes"]["name"]).to eq(most_habitable_rooms.name)
@@ -95,7 +95,7 @@ RSpec.describe ViabilityAppraisalsController do
       most_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first
       least_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).last
 
-      get :index, params: { sort: 'habitable_rooms' }
+      get :index, params: { directional_sort: 'habitable_rooms' }
       json_response = JSON.parse(response.body)
 
       expect(json_response["data"].first["attributes"]["name"]).to eq(least_habitable_rooms.name)

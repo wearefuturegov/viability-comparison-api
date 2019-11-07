@@ -71,7 +71,7 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response contains only viability_appraisals with more than 300 and less than 700 habitable rooms" do
       json_response = JSON.parse(response.body)
-      viability_appraisal_count = ViabilityAppraisal.where("habitable_rooms > ?", 300).where("habitable_rooms < ?", 700).count
+      viability_appraisal_count = ViabilityAppraisal.where("habitable_rooms >= ?", 300).where("habitable_rooms <= ?", 700).count
       expect(json_response["data"].count).to eq(viability_appraisal_count)
     end
 

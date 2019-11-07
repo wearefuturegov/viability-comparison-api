@@ -18,29 +18,29 @@ class ViabilityAppraisalsController < ApplicationController
   end
 
   # POST /viability_appraisals
-  def create
-    @viability_appraisal = ViabilityAppraisal.new(viability_appraisal_params)
+  # def create
+  #   @viability_appraisal = ViabilityAppraisal.new(viability_appraisal_params)
 
-    if @viability_appraisal.save
-      render json: @viability_appraisal, status: :created, location: @viability_appraisal
-    else
-      render json: @viability_appraisal.errors, status: :unprocessable_entity
-    end
-  end
+  #   if @viability_appraisal.save
+  #     render json: @viability_appraisal, status: :created, location: @viability_appraisal
+  #   else
+  #     render json: @viability_appraisal.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # PATCH/PUT /viability_appraisals/1
-  def update
-    if @viability_appraisal.update(viability_appraisal_params)
-      render json: @viability_appraisal
-    else
-      render json: @viability_appraisal.errors, status: :unprocessable_entity
-    end
-  end
+  # # PATCH/PUT /viability_appraisals/1
+  # def update
+  #   if @viability_appraisal.update(viability_appraisal_params)
+  #     render json: @viability_appraisal
+  #   else
+  #     render json: @viability_appraisal.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /viability_appraisals/1
-  def destroy
-    @viability_appraisal.destroy
-  end
+  # def destroy
+  #   @viability_appraisal.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

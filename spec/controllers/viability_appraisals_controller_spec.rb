@@ -106,4 +106,25 @@ RSpec.describe ViabilityAppraisalsController do
 
   end
 
+  describe "GET #index filter by residential units" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+    let!(:on_margin_va) { FactoryBot.create(:viability_appraisal, residential_units: 200) }
+
+    before do
+      get :index, params: { min_residential_units: 200, max_residential_units: 600 }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "JSON body response contains only viability_appraisals with more than or equal to 200 and less than or equal to 600 habitable rooms" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_count = ViabilityAppraisal.where("residential_units >= ?", 200).where("residential_units <= ?", 600).count
+      expect(json_response["data"].count).to eq(viability_appraisal_count)
+      expect(json_response["data"].last["attributes"]["name"]).to eq(on_margin_va.name)
+    end
+
+  end
+
 end

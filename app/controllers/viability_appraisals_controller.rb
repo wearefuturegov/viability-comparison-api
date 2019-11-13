@@ -54,6 +54,6 @@ class ViabilityAppraisalsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:min_habitable_rooms, :max_habitable_rooms, :directional_sort)
+      params.slice(:min_habitable_rooms, :max_habitable_rooms, :min_residential_units, :max_residential_units, :directional_sort)
     end
 end

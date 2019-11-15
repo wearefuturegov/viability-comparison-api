@@ -44,7 +44,8 @@ CSV.foreach(Rails.root.join('lib/viability_appraisals.csv'), headers: true) do |
     benchmark_land_value_pence: to_pence(row["Benchmark Land Value"]),
     residential_units: row["Residential Units"],
     habitable_rooms: row["Habitable Rooms"],
-    commercial_area_square_centimetres: to_centimetres(row["Commercial Area"])
+    commercial_area_square_centimetres: to_centimetres(row["Commercial Area"]),
+    boundary: row["Boundary GeoJSON"]
   )
   if location = row["Location"]
     va.latitude = location.split(", ")[0]

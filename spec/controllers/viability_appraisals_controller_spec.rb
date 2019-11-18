@@ -143,7 +143,24 @@ RSpec.describe ViabilityAppraisalsController do
       viability_appraisal_count = ViabilityAppraisal.where("stories >= ?", 20).where("stories <= ?", 60).count
       expect(json_response["data"].count).to eq(viability_appraisal_count)
     end
+  end
 
+  describe "GET #index filter by GDV" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+
+    before do
+      get :index, params: { min_gdv: 2000000, max_gdv: 6000000 }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "JSON body response contains only viability_appraisals within the correct GDV range" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_count = ViabilityAppraisal.where("gross_development_value_pence >= ?", 200000000).where("gross_development_value_pence <= ?", 600000000).count
+      expect(json_response["data"].count).to eq(viability_appraisal_count)
+    end
   end
 
   describe "GET #show only return boundary coordinates" do

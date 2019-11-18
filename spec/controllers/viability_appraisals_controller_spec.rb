@@ -127,6 +127,25 @@ RSpec.describe ViabilityAppraisalsController do
 
   end
 
+  describe "GET #index filter by stories" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+
+    before do
+      get :index, params: { min_stories: 20, max_stories: 60 }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "JSON body response contains only viability_appraisals with more than or equal to 20 and less than or equal to 60 stories" do
+      json_response = JSON.parse(response.body)
+      viability_appraisal_count = ViabilityAppraisal.where("stories >= ?", 20).where("stories <= ?", 60).count
+      expect(json_response["data"].count).to eq(viability_appraisal_count)
+    end
+
+  end
+
   describe "GET #show only return boundary coordinates" do
     let!(:viability_appraisal) { FactoryBot.create(:viability_appraisal) }
 

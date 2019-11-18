@@ -3,6 +3,8 @@ class ViabilityAppraisal < ApplicationRecord
   scope :max_habitable_rooms, -> (max_habitable_rooms) { where("habitable_rooms <= ?", max_habitable_rooms) }
   scope :min_residential_units, -> (min_residential_units) { where("residential_units >= ?", min_residential_units) }
   scope :max_residential_units, -> (max_residential_units) { where("residential_units <= ?", max_residential_units) }
+  scope :min_stories, -> (min_stories) { where("stories >= ?", min_stories) }
+  scope :max_stories, -> (max_stories) { where("stories <= ?", max_stories) }
   scope :directional_sort, -> (field) { order(field.start_with?('-') ? "#{field[1..-1]} desc NULLS LAST" : "#{field} asc NULLS LAST") }
 
   def self.habitable_rooms_max

@@ -21,6 +21,7 @@ FactoryBot.define do
     benchmark_land_value_pence { 999 }
     residential_units { rand(800) }
     habitable_rooms { rand(1000) }
+    stories { rand(100) }
     commercial_area_square_centimetres{ 999 }
   end
 end

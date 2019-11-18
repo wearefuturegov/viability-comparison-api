@@ -127,4 +127,17 @@ RSpec.describe ViabilityAppraisalsController do
 
   end
 
+  describe "GET #show only return boundary coordinates" do
+    let!(:viability_appraisal) { FactoryBot.create(:viability_appraisal) }
+
+    before do
+      get :show, params: { id: viability_appraisal.id }
+    end
+
+    it "JSON body response only contains coordinates of GeoJSON boundary field" do
+      json_response = JSON.parse(response.body)
+      expect(json_response["data"]["attributes"]["boundary"]).to eq(viability_appraisal.boundary["features"].first["geometry"]["coordinates"])
+    end
+  end
+
 end

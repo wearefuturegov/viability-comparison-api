@@ -136,7 +136,7 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response only contains coordinates of GeoJSON boundary field" do
       json_response = JSON.parse(response.body)
-      expect(json_response["data"]["attributes"]["boundary"]).to eq(JSON.parse(viability_appraisal.boundary)["features"].first["geometry"]["coordinates"])
+      expect(json_response["data"]["attributes"]["boundary"]).to eq(JSON.parse(viability_appraisal.boundary)["features"].first["geometry"])
     end
   end
 

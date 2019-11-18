@@ -136,7 +136,21 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response only contains coordinates of GeoJSON boundary field" do
       json_response = JSON.parse(response.body)
-      expect(json_response["data"]["attributes"]["boundary"]).to eq(viability_appraisal.boundary["features"].first["geometry"]["coordinates"])
+      expect(json_response["data"]["attributes"]["boundary"]).to eq(JSON.parse(viability_appraisal.boundary)["features"].first["geometry"]["coordinates"])
+    end
+  end
+
+  describe "GET #index should return upper limits for fields" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+
+    before do
+      get :index
+    end
+
+    it "JSON body response contains meta fields for maximum values" do
+      max_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first.habitable_rooms
+      json_response = JSON.parse(response.body)
+      expect(json_response["meta"]["habitable_rooms_max"]).to eq(max_habitable_rooms)
     end
   end
 

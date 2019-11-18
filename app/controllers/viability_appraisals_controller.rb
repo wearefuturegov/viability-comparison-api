@@ -9,7 +9,12 @@ class ViabilityAppraisalsController < ApplicationController
       @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?
     end
 
-    render json: ViabilityAppraisalSerializer.new(@viability_appraisals)
+    options = {}
+    options[:meta] = {
+      habitable_rooms_max: ViabilityAppraisal.habitable_rooms_max,
+      residential_units_max: ViabilityAppraisal.residential_units_max
+    }
+    render json: ViabilityAppraisalSerializer.new(@viability_appraisals, options)
   end
 
   # GET /viability_appraisals/1

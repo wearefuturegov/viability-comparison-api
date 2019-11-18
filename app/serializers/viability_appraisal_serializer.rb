@@ -5,4 +5,5 @@ class ViabilityAppraisalSerializer
   attribute :boundary do |object|
     JSON.parse(object.boundary)["features"].first["geometry"]["coordinates"] if object.boundary
   end
+
 end

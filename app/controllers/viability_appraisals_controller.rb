@@ -14,7 +14,7 @@ class ViabilityAppraisalsController < ApplicationController
       habitable_rooms_max: ViabilityAppraisal.habitable_rooms_max,
       residential_units_max: ViabilityAppraisal.residential_units_max,
       stories_max: ViabilityAppraisal.stories_max,
-      gdv_max: ViabilityAppraisal.gdv_max
+      gdv_max: ViabilityAppraisal.gdv_pounds_max
     }
     render json: ViabilityAppraisalSerializer.new(@viability_appraisals, options)
   end

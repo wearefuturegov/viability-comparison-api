@@ -17,8 +17,8 @@ class ViabilityAppraisal < ApplicationRecord
     ViabilityAppraisal.where.not(residential_units: nil).order(residential_units: :desc).first.residential_units
   end
 
-  def self.gdv_max
-    ViabilityAppraisal.where.not(gross_development_value_pence: nil).order(gross_development_value_pence: :desc).first.gross_development_value_pence * 100
+  def self.gdv_pounds_max
+    ViabilityAppraisal.where.not(gross_development_value_pence: nil).order(gross_development_value_pence: :desc).first.gross_development_value_pence / 100
   end
 
   def self.stories_max

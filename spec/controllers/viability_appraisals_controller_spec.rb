@@ -185,8 +185,14 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response contains meta fields for maximum values" do
       max_habitable_rooms = ViabilityAppraisal.order(habitable_rooms: :desc).first.habitable_rooms
+      max_residential_units = ViabilityAppraisal.order(residential_units: :desc).first.residential_units
+      max_gdv_pounds = ViabilityAppraisal.order(gross_development_value_pence: :desc).first.gross_development_value_pence / 100
+      max_stories = ViabilityAppraisal.order(stories: :desc).first.stories
       json_response = JSON.parse(response.body)
       expect(json_response["meta"]["habitable_rooms_max"]).to eq(max_habitable_rooms)
+      expect(json_response["meta"]["residential_units_max"]).to eq(max_residential_units)
+      expect(json_response["meta"]["gdv_pounds_max"]).to eq(max_gdv_pounds)
+      expect(json_response["meta"]["stories_max"]).to eq(max_stories)
     end
   end
 

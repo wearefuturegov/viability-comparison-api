@@ -234,7 +234,8 @@ RSpec.describe ViabilityAppraisalsController do
 
     it "JSON body response contains developer profit as a percentage of GDV" do
       json_response = JSON.parse(response.body)
-      expect(json_response["data"]["attributes"]["developer_profit_as_percentages_of_gdv"]).to eq((100/viability_appraisal.gross_development_value_pence.to_f * viability_appraisal.developer_profit_pence).round)
+      expect(json_response["data"]["attributes"]["developer_profit_as_percentage_of_gdv"]).to eq((100/viability_appraisal.gross_development_value_pence.to_f * viability_appraisal.developer_profit_pence).round)
+      expect(json_response["data"]["attributes"]["finance_as_percentage_of_gdv"]).to eq((100/viability_appraisal.gross_development_value_pence.to_f * viability_appraisal.finance_pence).round)
     end
   end
 

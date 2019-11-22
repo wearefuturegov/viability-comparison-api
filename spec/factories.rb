@@ -16,7 +16,7 @@ FactoryBot.define do
     marketing_and_letting_pence { 999 }
     finance_pence { 999 }
     financial_planning_obligations_pence { 999 }
-    developer_profit_pence { 999 }
+    developer_profit_pence { rand(80000000) }
     residual_land_value_pence { 999 }
     benchmark_land_value_pence { 999 }
     residential_units { rand(800) }

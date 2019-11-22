@@ -225,4 +225,17 @@ RSpec.describe ViabilityAppraisalsController do
     end
   end
 
+   describe "GET #show returns percentages for figures" do
+    let!(:viability_appraisal) { FactoryBot.create(:viability_appraisal) }
+
+    before do
+      get :show, params: { id: viability_appraisal.id }
+    end
+
+    it "JSON body response contains developer profit as a percentage of GDV" do
+      json_response = JSON.parse(response.body)
+      expect(json_response["data"]["attributes"]["developer_profit_as_percentages_of_gdv"]).to eq((100/viability_appraisal.gross_development_value_pence.to_f * viability_appraisal.developer_profit_pence).round)
+    end
+  end
+
 end

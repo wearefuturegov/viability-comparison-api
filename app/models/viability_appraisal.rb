@@ -8,6 +8,7 @@ class ViabilityAppraisal < ApplicationRecord
   scope :min_gdv, -> (min_gdv) { where("gross_development_value_pence >= ?", min_gdv.to_i * 100) }
   scope :max_gdv, -> (max_gdv) { where("gross_development_value_pence <= ?", max_gdv.to_i * 100) }
   scope :directional_sort, -> (field) { order(field.start_with?('-') ? "#{field[1..-1]} desc NULLS LAST" : "#{field} asc NULLS LAST") }
+  scope :commercial, -> (value) { value.downcase == "true" ? where.not(commercial_area_square_centimetres: 0) : where(commercial_area_square_centimetres: 0) }
 
   def self.habitable_rooms_max
     ViabilityAppraisal.where.not(habitable_rooms: nil).order(habitable_rooms: :desc).first.habitable_rooms

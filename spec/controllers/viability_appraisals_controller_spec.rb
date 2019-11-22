@@ -163,6 +163,35 @@ RSpec.describe ViabilityAppraisalsController do
     end
   end
 
+  describe "GET #index filter by Commerical area toggle" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 15) }
+    let!(:viability_appraisals_no_commercial) { FactoryBot.create_list(:viability_appraisal_no_commercial, 10) }
+
+    it "JSON body response contains only viability_appraisals with commercial area" do
+      get :index, params: { commercial: true }
+      expect(response).to have_http_status(:success)
+      json_response = JSON.parse(response.body)
+      viability_appraisals_with_commerical_count = ViabilityAppraisal.where.not(commercial_area_square_centimetres: 0).count
+      expect(json_response["data"].count).to eq(viability_appraisals_with_commerical_count)
+    end
+
+    it "JSON body response contains only viability_appraisals with no commercial area" do
+      get :index, params: { commercial: false }
+      expect(response).to have_http_status(:success)
+      json_response = JSON.parse(response.body)
+      viability_appraisals_with_no_commerical_count = ViabilityAppraisal.where(commercial_area_square_centimetres: 0).count
+      expect(json_response["data"].count).to eq(viability_appraisals_with_no_commerical_count)
+    end
+
+    it "JSON body response contains all viability_appraisals, commercial area or no commercial area" do
+      get :index
+      expect(response).to have_http_status(:success)
+      json_response = JSON.parse(response.body)
+      viability_appraisals_count = ViabilityAppraisal.all.count
+      expect(json_response["data"].count).to eq(viability_appraisals_count)
+    end
+  end
+
   describe "GET #show only return boundary coordinates" do
     let!(:viability_appraisal) { FactoryBot.create(:viability_appraisal) }
 

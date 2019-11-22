@@ -4,7 +4,6 @@ class ViabilityAppraisalsController < ApplicationController
   # GET /viability_appraisals
   def index
     @viability_appraisals = ViabilityAppraisal.all
-
     filtering_params(params).each do |key, value|
       @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?
     end
@@ -61,6 +60,6 @@ class ViabilityAppraisalsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:min_habitable_rooms, :max_habitable_rooms, :min_residential_units, :max_residential_units, :min_stories, :max_stories, :min_gdv, :max_gdv, :directional_sort)
+      params.slice(:min_habitable_rooms, :max_habitable_rooms, :min_residential_units, :max_residential_units, :min_stories, :max_stories, :min_gdv, :max_gdv, :directional_sort, :commercial)
     end
 end

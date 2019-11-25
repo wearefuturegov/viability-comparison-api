@@ -57,7 +57,7 @@ class ViabilityAppraisalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def viability_appraisal_params
-      params.require(:viability_appraisal).permit(:local_authority, :local_authority_id, :application, :name, :latitude, :longitude, :date_submitted, :gross_development_value, :construction_costs, :professional_fees, :marketing_and_letting, :finance, :financial_planning_obligations, :developer_profit, :residual_land_value, :benchmark_land_value, :residential_units, :habitable_rooms, :commercial_area_square_meters)
+      params.require(:viability_appraisal).permit(:local_authority, :local_authority_id, :application, :name, :latitude, :longitude, :date_submitted, :gross_development_value, :construction_costs, :professional_fees, :marketing_and_letting, :finance, :financial_planning_obligations, :developer_profit, :residual_land_value, :benchmark_land_value, :residential_units, :habitable_rooms, :commercial_area_square_meters, :affordable_housing_percentage)
     end
 
     def filtering_params(params)

@@ -23,6 +23,7 @@ FactoryBot.define do
     habitable_rooms { rand(1000) }
     stories { rand(100) }
     commercial_area_square_centimetres{ 999 }
+    affordable_housing_percentage { rand(100) }
   end
 
   factory :viability_appraisal_no_commercial, class: ViabilityAppraisal do
@@ -47,5 +48,6 @@ FactoryBot.define do
     habitable_rooms { rand(1000) }
     stories { rand(100) }
     commercial_area_square_centimetres{ 0 }
+    affordable_housing_percentage { rand(100) }
   end
 end

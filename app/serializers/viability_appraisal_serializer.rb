@@ -22,4 +22,20 @@ class ViabilityAppraisalSerializer
     end
   end
 
+  attribute :professional_fees_as_percentage_of_construction_costs do |object|
+    if object.professional_fees_pence && object.construction_costs_pence
+      (100 / object.construction_costs_pence.to_f * object.professional_fees_pence).round
+    else
+      nil
+    end
+  end
+
+  attribute :marketing_and_letting_as_percentage_of_construction_costs do |object|
+    if object.marketing_and_letting_pence && object.construction_costs_pence
+      (100 / object.construction_costs_pence.to_f * object.marketing_and_letting_pence).round
+    else
+      nil
+    end
+  end
+
 end

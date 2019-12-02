@@ -239,4 +239,23 @@ RSpec.describe ViabilityAppraisalsController do
     end
   end
 
+  describe "GET #index filter by id" do
+    let!(:viability_appraisals) { FactoryBot.create_list(:viability_appraisal, 20) }
+
+    before do
+      ids = viability_appraisals.values_at(1,5,7,13,18).pluck(:id).join(",")
+      get :index, params: { id: ids }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "JSON body response contains only the viability_appraisals for the given id list" do
+      ids = viability_appraisals.values_at(1,5,7,13,18).pluck(:id).map(&:to_s) # formats so will look same as in params eg ?id=1,5,8
+      json_response = JSON.parse(response.body)
+      expect(json_response["data"].map { |va| va["id"].to_s }).to eq(ids)
+    end
+  end
+
 end

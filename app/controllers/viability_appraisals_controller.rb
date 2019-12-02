@@ -3,7 +3,11 @@ class ViabilityAppraisalsController < ApplicationController
 
   # GET /viability_appraisals
   def index
-    @viability_appraisals = ViabilityAppraisal.all
+    if params[:id]
+      @viability_appraisals = ViabilityAppraisal.find(params[:id].split(","))
+    else
+      @viability_appraisals = ViabilityAppraisal.all
+    end
 
     filtering_params(params).each do |key, value|
       @viability_appraisals = @viability_appraisals.public_send(key, value) if value.present?

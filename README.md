@@ -42,3 +42,6 @@ You can also filter using the following parameters:
 * `max_gdv` - maximum GDV in £
 * `commercial` - properties with or without commerical space - can be `true` or `false`
 * `directional_sort` - Order results by a field eg `-habitable_rooms` The '-' symbol means descending, without is ascending.
+
+An example request with filtering might be:
+`localhost:300/viability_appraisals?min_habitable_rooms=100&max_habitable_rooms=200&commercial=true`

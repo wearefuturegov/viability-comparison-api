@@ -4,7 +4,7 @@ A backend API that serves up viability assessment data for comparison. It:
 
 * Has a (WIP) database of viability appraisals (seeded from csv file) - some data is made up for testing purposes.
 * Makes this data available for separate front-end applications to request.
-* Has serveral filtering options.
+* Has several filtering options.
 
 Built with Rails (6.0.0).
 
